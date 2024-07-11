@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+  <script type="text/javascript">
+    window.tailwind.config = {
+      darkMode: ['class'],
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: '#ffa24a',
+              foreground: '#063a5a'
+            },
+            secondary: {
+              DEFAULT: '#063a5a',
+              foreground: '#ffa24a'
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))'
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))'
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))'
+            },
+            popover: {
+              DEFAULT: 'hsl(var(--popover))',
+              foreground: 'hsl(var(--popover-foreground))'
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))'
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 30 95% 64%;
+        --primary-foreground: 210 80% 15%;
+        --secondary: 210 100% 20%;
+        --secondary-foreground: 30 100% 85%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+      }
+    }
+  </style>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('aside nav ul li a');
+      const mainContent = document.querySelector('main');
+
+      const loadMenuArtContent = () => {
+        mainContent.innerHTML = `
+        <header class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-bold">Bienvenido</h1>
+          </header>
+          <section>
+            <div class="mb-4">
+              <div class="flex space-x-4 items-center">
+                <input type="text" placeholder="Buscar Art" class="flex-1 p-2 border rounded bg-input text-foreground" />
+                <button class="bg-primary text-primary-foreground py-2 px-4 rounded hover:bg-primary/80 transition-transform transform hover:scale-105">Buscar</button>
+              </div>
+            </div>
+            <div class="bg-card text-card-foreground p-4 rounded shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Usuarios Sin Registrar</h2>
+              </div>
+              <table class="w-full text-left">
+                <thead>
+                  <tr>
+                    <th class="p-2 border-b">Nombre</th>
+                    <th class="p-2 border-b">Rut</th>
+                    <th class="p-2 border-b">Correo Electronico</th>
+                    <th class="p-2 border-b">Rol</th>
+                    <th class="p-2 border-b">Aprobar</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      };
+      loadMenuArtContent();
+
+      buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          
+          buttons.forEach(btn => btn.classList.remove('bg-secondary', 'text-secondary-foreground'));
+          
+          button.classList.add('bg-secondary', 'text-secondary-foreground');
+
+          switch(button.textContent.trim()) {
+            case 'Usuarios Sin Verificar':
+              loadMenuArtContent();
+              break;
+            case 'Guia Interfaz':
+              mainContent.innerHTML = `
+                <header class="flex justify-between items-center mb-6">
+                  <h1 class="text-2xl font-bold">Estas en Guia Interfaz</h1>
+                </header>
+              `;
+              break;
+            case 'Configuracion':
+              mainContent.innerHTML = `
+                <header class="flex justify-between items-center mb-6">
+                  <h1 class="text-2xl font-bold">Estas en Configuracion</h1>
+                </header>
+              `;
+              break;
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="flex h-screen bg-zinc-100">
+    <aside class="w-64 bg-primary text-primary-foreground p-4">
+      <div class="text-2xl font-bold mb-6">Gerente</div>
+      <nav>
+        <ul>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded bg-secondary text-secondary-foreground">Usuarios Sin Verificar</a></li>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Interfaz</a></li>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Configuracion</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="flex-1 p-6">
+    </main>
+  </div>
+  <script>
+    let loadUsers;
+    
+    document.addEventListener('DOMContentLoaded', () => {
+      loadUsers = async () => {
+        const response = await fetch('/get_unconfirmed_users');
+        const users = await response.json();
+        const tbody = document.querySelector('table tbody');
+        tbody.innerHTML = '';
+        users.forEach(user => {
+          const row = `
+            <tr>
+              <td class="p-2 border-b">${user.Nombre}</td>
+              <td class="p-2 border-b">${user.Rut}</td>
+              <td class="p-2 border-b">${user.Correo_electronico}</td>
+              <td class="p-2 border-b">${user.Rol}</td>
+              <td class="p-2 border-b">
+                <button onclick="approveUser('${user.Rut}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
+                  Aprobar
+                </button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      };
+    
+      loadUsers();
+    });
+    
+    async function approveUser(rut) {
+      try {
+        const response = await fetch('/approve_user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ rut: rut }),
+        });
+        if (response.ok) {
+          await loadUsers();
+        } else {
+          const errorData = await response.json();
+          alert('Error al aprobar el usuario: ' + errorData.error);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error al aprobar el usuario');
+      }
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="{{ url_for('static', filename='img/logoCiquimet.jpeg') }}" alt="Logo" style="height: auto; width: 300px;">
+        </div>
+        <div class="form-container" id="form-container">
+            <form class="form form-signing" id="login-form" action="{{ url_for('login') }}" method="POST">
+                <h2>Iniciar Sesión</h2>
+                <input type="text" placeholder="Rut" name="rut" required>
+                <input type="password" placeholder="Contraseña" name="password" required>
+                <button type="submit">Iniciar Sesión</button>
+                <div class="switch">
+                    <button type="button" onclick="switchToRegister()">Crear una cuenta</button>
+                </div>
+            </form>
+            <form class="form" id="register-form" action="{{ url_for('register') }}" method="POST">
+                <h2>Registro</h2>
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="rut" placeholder="Rut" required>
+                <input type="email" name="correo" placeholder="Correo Electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
+                <p>Ingresar Rol:</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="rol" value="supervisor" required>Supervisor</label>
+                    <label><input type="radio" name="rol" value="trabajador" required>Trabajador</label>
+                </div>
+                <button type="submit">Registrar</button>
+                <div class="switch">
+                    <button type="button" onclick="switchToLogin()">Ya tengo una cuenta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const formContainer = document.getElementById('form-container');
+
+        function switchToRegister() {
+            formContainer.style.transform = 'translateX(-50%)';
+        }
+
+        function switchToLogin() {
+            formContainer.style.transform = 'translateX(0)';
+        }
+    </script>
+</body>
+</html>

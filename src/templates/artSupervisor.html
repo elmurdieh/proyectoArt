@@ -1,0 +1,335 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/artSupervisor.css') }}">
+</head>
+
+<body>
+  <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container5">
+    <thead>
+      <tr>
+        <th colspan="9" class="border border-zinc-800 p-2" id="titulo2">VALIDACIÓN ART POR EQUIPO EJECUTOR.</th>
+      </tr>
+      <tr>
+        <th class="border border-zinc-800 p-2"></th>
+        <th class="border border-zinc-800 p-2">Nombre</th>
+        <th class="border border-zinc-800 p-2">Cargo</th>
+        <th class="border border-zinc-800 p-2" colspan="2">¿Verifiqué las condiciones físicas y psicológicas de todo el
+          Equipo Ejecutor del Trabajo?</th>
+        <th class="border border-zinc-800 p-2">Firma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-black p-5 text-center">LÍDER</td>
+        <td class="border border-black p-2"><input type="text" class="w-full  text-center"></td>
+        <td class="border border-black p-2"><input type="text" class="w-full  text-center"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo5-1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo5-1"></td>
+        <td class="border border-black p-2"><button class="p-3">FIRMAR</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="mb-4" id="botonesArriba">
+    <button class="text-black p-2 w-full botonesIzquierdos">Volver al Menu</button>
+    <button class="text-black p-2 w-full botonesIzquierdos" onclick="window.location.href='/interfaz_supervisor'">Asignar Trabajadores</button>
+  </div>
+  <div class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container1">
+    <h1 class="text-center text-2xl font-bold mb-4 w-full">Planificaciones del Trabajo a Realizar</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block mb-2">Supervisor Que Asigna el Trabajo</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Empresa</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Gerencia</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Fecha</label>
+        <input type="date" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Superintendencia / direccion</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Hora Inicio</label>
+        <input type="time" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Trabajo a Realizar</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Hora Termino</label>
+        <input type="time" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+      <div>
+        <label class="block mb-2">Lugar Especifico</label>
+        <input type="text" class="w-full p-2 border rounded-md text-center" required />
+      </div>
+    </div>
+  </div>
+  <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container2">
+    <thead>
+      <tr>
+        <th colspan="3" class="border border-zinc-800 p-2" id="titulo2">Preguntas Transversales, aplicable a todos los
+          riesgos</th>
+      </tr>
+      <tr>
+        <th class="border border-zinc-800 p-2">Supervisor(A)</th>
+        <th class="border border-zinc-800 p-2">Si</th>
+        <th class="border border-zinc-800 p-2">No</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿El trabajo que asignaré cuenta con un estándar, procedimiento y/o
+          instructivo? Indicar nombre:</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-1"></td>
+      </tr>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿El personal que asignaré para realizar el trabajo, cuenta con las
+          capacitaciones, competencias, salud compatible y/o acreditaciones requeridas?</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-2"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-2"></td>
+      </tr>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿Durante la planificación del trabajo, me aseguro de solicitar los
+          permisos para ingresar a las áreas, intervenir equipos y/o interactuar con energías?</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-3"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-3"></td>
+      </tr>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿Verifiqué que el personal cuenta con los elementos requeridos para
+          realizar la segregación y señalización del área de trabajo, según diseño?</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-4"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-4"></td>
+      </tr>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿El personal a mi cargo cuenta con sistema de comunicación de acuerdo al
+          protocolo de emergencia del área?</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-5"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-5"></td>
+      </tr>
+      <tr>
+        <td class="border border-zinc-800 p-2">¿El personal que asignaré para realizar el trabajo, cuenta con los EPP
+          definidos en el procedimiento de trabajo?</td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-6"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-6"></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="max-w-4xl mx-auto p-4 rounded-lg" id="container3">
+    <h1 class="text-center text-2xl font-bold mb-4">RIESGOS CRÍTICOS ESPECÍFICOS DEL TRABAJO</h1>
+    <div class="flex justify-between">
+      <div class="w-1/2 border border-black p-2 encuesta3">
+        <div class="flex justify-between mb-2">
+          <label class="mr-2">Nombre:</label>
+          <input type="text" class="border flex-grow text-center">
+        </div>
+        <div class="flex justify-between mb-2">
+          <label class="mr-2">Cod:</label>
+          <input type="text" class="border flex-grow text-center">
+        </div>
+        <table class="w-full border-collapse border border-black">
+          <thead>
+            <tr>
+              <th class="border border-black p-2" colspan="2">N°</th>
+              <th class="border border-black p-2">Si</th>
+              <th class="border border-black p-2">No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-1"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-1"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-2"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-2"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-3"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-3"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-4"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-4"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-5"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-5"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-6"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-6"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-7"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-7"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-8"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-8"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-9"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-9"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-1-10"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-1-10"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="w-1/2 border border-black p-2 encuesta3" id="encuesta3">
+        <div class="flex justify-between mb-2">
+          <label class="mr-2">Nombre:</label>
+          <input type="text" class="border flex-grow text-center">
+        </div>
+        <div class="flex justify-between mb-2">
+          <label class="mr-2">Cod:</label>
+          <input type="text" class="border flex-grow text-center">
+        </div>
+        <table class="w-full border-collapse border border-black">
+          <thead>
+            <tr>
+              <th class="border border-black p-2" colspan="2">N°</th>
+              <th class="border border-black p-2">Si</th>
+              <th class="border border-black p-2">No</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-1"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-1"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-2"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-2"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-3"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-3"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-4"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-4"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-5"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-5"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-6"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-6"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-7"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-7"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-8"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-8"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-9"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-9"></td>
+            </tr>
+            <tr>
+              <td class="border border-black p-2">N°</td>
+              <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+              <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo3-2-10"></td>
+              <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo3-2-10"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container4">
+    <thead>
+      <tr>
+        <th colspan="9" class="border border-zinc-800 p-2" id="titulo2">Trabajo En Simultáneo</th>
+      </tr>
+      <tr>
+        <th class="border border-zinc-800 p-2" colspan="2">¿Existen trabajos
+          en simultáneo?</th>
+        <th class="border border-zinc-800 p-2">Si su respuesta es SI, describa el contexto del
+          trabajo en simultáneo y verifique:</th>
+        <th class="border border-zinc-800 p-2" colspan="2">Se realizó la coordinación con el líder
+          de la cuadrilla que realiza el trabajo
+          en simultáneo?</th>
+        <th class="border border-zinc-800 p-2" colspan="2">¿Se realizó la verificación
+          cruzada de Controles Críticos?</th>
+        <th class="border border-zinc-800 p-2" colspan="2">¿Se comunicó a todos los trabajadores
+          las acciones de control que debe aplicar
+          en trabajos simultáneos?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-1-1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-1-1"></td>
+        <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-2-1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-2-1"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-3-1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-3-1"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-4-1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-4-1"></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+</html>

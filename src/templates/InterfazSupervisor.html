@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+  <script type="text/javascript">
+    window.tailwind.config = {
+      darkMode: ['class'],
+      theme: {
+        extend: {
+          colors: {
+            border: 'hsl(var(--border))',
+            input: 'hsl(var(--input))',
+            ring: 'hsl(var(--ring))',
+            background: 'hsl(var(--background))',
+            foreground: 'hsl(var(--foreground))',
+            primary: {
+              DEFAULT: '#ffa24a',
+              foreground: '#063a5a'
+            },
+            secondary: {
+              DEFAULT: '#063a5a',
+              foreground: '#ffa24a'
+            },
+            destructive: {
+              DEFAULT: 'hsl(var(--destructive))',
+              foreground: 'hsl(var(--destructive-foreground))'
+            },
+            muted: {
+              DEFAULT: 'hsl(var(--muted))',
+              foreground: 'hsl(var(--muted-foreground))'
+            },
+            accent: {
+              DEFAULT: 'hsl(var(--accent))',
+              foreground: 'hsl(var(--accent-foreground))'
+            },
+            popover: {
+              DEFAULT: 'hsl(var(--popover))',
+              foreground: 'hsl(var(--popover-foreground))'
+            },
+            card: {
+              DEFAULT: 'hsl(var(--card))',
+              foreground: 'hsl(var(--card-foreground))'
+            },
+          },
+        }
+      }
+    }
+  </script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const buttons = document.querySelectorAll('aside nav ul li a');
+      const mainContent = document.querySelector('main');
+
+      const loadMenuArtContent = () => {
+        mainContent.innerHTML = `
+        <header class="flex justify-between items-center mb-6">
+          <h1 class="text-2xl font-bold">Bienvenido</h1>
+          </header>
+          <section>
+            <div class="mb-4">
+              <div class="flex space-x-4 items-center">
+                <input type="text" placeholder="Buscar Art" class="flex-1 p-2 border rounded bg-input text-foreground" />
+                <button class="bg-primary text-primary-foreground py-2 px-4 rounded hover:bg-primary/80 transition-transform transform hover:scale-105">Buscar</button>
+                <button onclick="window.location.href='/artSupervisor.html'" class="bg-accent text-accent-foreground py-2 px-20 rounded hover:bg-primary/80 transition-transform transform hover:scale-105">Iniciar Art</button>
+              </div>
+            </div>
+            <div class="bg-card text-card-foreground p-4 rounded shadow">
+              <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold">Listado de Art's</h2>
+              </div>
+              <table class="w-full text-left">
+                <thead>
+                  <tr>
+                    <th class="p-2 border-b">Fecha Creacion</th>
+                    <th class="p-2 border-b">Trabajadores Asignados</th>
+                    <th class="p-2 border-b">Estado Cierre</th>
+                    <th class="p-2 border-b">Ver Mas Informacion</th>
+                    <th class="p-2 border-b">Descargar</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      };
+
+      loadMenuArtContent();
+
+      buttons.forEach(button => {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          
+          buttons.forEach(btn => btn.classList.remove('bg-secondary', 'text-secondary-foreground'));
+          
+          button.classList.add('bg-secondary', 'text-secondary-foreground');
+
+          switch(button.textContent.trim()) {
+            case 'Menu Art':
+              loadMenuArtContent();
+              break;
+            case 'Guia Interfaz':
+              mainContent.innerHTML = `
+                <header class="flex justify-between items-center mb-6">
+                  <h1 class="text-2xl font-bold">Estas en Guia Interfaz</h1>
+                </header>
+              `;
+              break;
+            case 'Guia Controles Criticos':
+              mainContent.innerHTML = `
+                <header class="flex justify-between items-center mb-6">
+                  <h1 class="text-2xl font-bold">Estas en Guia Controles Criticos</h1>
+                </header>
+                <div>
+                  <embed src="" width="500" height="600">
+                </div>
+              `;
+              break;
+            case 'Configuracion':
+              mainContent.innerHTML = `
+                <header class="flex justify-between items-center mb-6">
+                  <h1 class="text-2xl font-bold">Estas en Configuracion</h1>
+                </header>
+              `;
+              break;
+          }
+        });
+      });
+    });
+  </script>
+</head>
+<body>
+  <div class="flex h-screen bg-zinc-100">
+    <aside class="w-64 bg-primary text-primary-foreground p-4">
+      <div class="text-2xl font-bold mb-6">Supervisor</div>
+      <nav>
+        <ul>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded bg-secondary text-secondary-foreground">Menu Art</a></li>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Interfaz</a></li>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Controles Criticos</a></li>
+          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Configuracion</a></li>
+        </ul>
+      </nav>
+    </aside>
+    <main class="flex-1 p-6">
+    </main>
+  </div>
+</body>
+</html>
