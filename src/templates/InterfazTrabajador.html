@@ -104,7 +104,7 @@
       const loadMenuArtContent = () => {
         mainContent.innerHTML = `
         <header class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-bold">Bienvenido</h1>
+          <h1 class="text-2xl font-bold">Bienvenido {{ nombre }}! </h1>
           </header>
           <section>
             <div class="mb-4">
@@ -159,8 +159,11 @@
             case 'Guia Controles Criticos':
               mainContent.innerHTML = `
                 <header class="flex justify-between items-center mb-6">
-                  <h1 class="text-2xl font-bold">Estas en Guia Controles Criticos</h1>
+                  <h1 class="text-2xl font-bold">Guia Controles Criticos</h1>
                 </header>
+                <div>
+                  <embed src="{{ url_for('static', filename='img/GuiaControles.pdf') }}" type="application/pdf" width="1000" height="825">
+                </div>
               `;
               break;
             case 'Configuracion':
