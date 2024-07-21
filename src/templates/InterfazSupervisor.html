@@ -81,7 +81,8 @@
                     <th class="p-2 border-b">Descargar</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+</tbody>
               </table>
             </div>
           </section>
@@ -149,12 +150,53 @@
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Interfaz</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Controles Criticos</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Configuracion</a></li>
-          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Cerrar Sesion</a></li>
+          <li class="mb-2">
+            <form action="/logout" method="post">
+              <button type="submit" class="block py-2 px-4 rounded hover:bg-primary/80">Cerrar Sesión</button>
+            </form>
+          </li>
         </ul>
       </nav>
     </aside>
     <main class="flex-1 p-6">
     </main>
   </div>
+  <script>
+    //Aca se cargan en la interfaz todos los Art  
+    document.addEventListener('DOMContentLoaded', () => {
+      const loadArts = async () => {
+        const response = await fetch('/get_arts');
+        if (!response.ok) {
+          console.error('Error fetching data:', response.statusText);
+          return;
+        }
+        const arts = await response.json();
+        const tbody = document.querySelector('table tbody');
+        tbody.innerHTML = '';
+        arts.forEach(art => {
+          const row = `
+            <tr>
+              <td class="p-2 border-b">${art.Fecha_creacion}</td>
+              <td class="p-2 border-b">${art.Hora_creacion}</td>
+              <td class="p-2 border-b">${art.Estado_cierre || 'N/A'}</td>
+              <td class="p-2 border-b">
+                <button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
+                  Ver Mas Informacion
+                </button>
+              </td>
+              <td class="p-2 border-b">
+                <button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
+                  Descargar
+                </button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      };
+    
+      loadArts();
+    });
+  </script>
 </body>
 </html>

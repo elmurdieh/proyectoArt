@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2024 a las 04:33:47
+-- Tiempo de generación: 21-07-2024 a las 06:28:26
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `art` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Fecha_creacion` varchar(30) DEFAULT NULL,
   `Hora_creacion` varchar(30) DEFAULT NULL,
   `Estado_cierre` tinyint(1) DEFAULT NULL,
@@ -54,7 +54,7 @@ INSERT INTO `art` (`Art_id`, `Fecha_creacion`, `Hora_creacion`, `Estado_cierre`,
 --
 
 CREATE TABLE `art_res_sup` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Supervisor_rut` varchar(12) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Cargo` varchar(100) NOT NULL,
@@ -99,7 +99,7 @@ INSERT INTO `art_res_sup` (`Art_id`, `Supervisor_rut`, `Nombre`, `Cargo`, `Cond_
 --
 
 CREATE TABLE `art_res_tra` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Trabajador_rut` varchar(12) NOT NULL,
   `Nombre` varchar(100) NOT NULL,
   `Cargo` varchar(100) NOT NULL,
@@ -139,7 +139,7 @@ INSERT INTO `gerente` (`Nombre`, `Rut`, `Correo_electronico`, `Contraseña`) VAL
 --
 
 CREATE TABLE `riesgos_criticos_sup` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Supervisor_rut` varchar(12) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Codigo` int(25) NOT NULL,
@@ -154,7 +154,7 @@ CREATE TABLE `riesgos_criticos_sup` (
 --
 
 CREATE TABLE `riesgos_criticos_tra` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Nombre` varchar(50) NOT NULL,
   `Codigo` int(25) NOT NULL,
   `Riesgo_nro` int(25) NOT NULL,
@@ -305,7 +305,7 @@ ALTER TABLE `u_sinconfirmar`
 -- AUTO_INCREMENT de la tabla `art`
 --
 ALTER TABLE `art`
-  MODIFY `Art_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Art_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Restricciones para tablas volcadas

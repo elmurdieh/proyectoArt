@@ -6,9 +6,9 @@ from functools import wraps
 from datetime import datetime
 from datetime import datetime, timezone
 import pytz
-
+#aca se hace la conexion a la base de datos
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Olasoymotopiz777@localhost/proyectoartv1'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Olasoymotopiz777@localhost/proyectoartv1' # usuario/contraseña/localhost dejarlo como esta/nombre de la DB
 app.config['SECRET_KEY'] = '78808261'
 db = SQLAlchemy(app)
 
@@ -70,7 +70,7 @@ class ArtResSup(db.Model):
     Pre_trans_5 = db.Column(db.Boolean, nullable=False)
     Pre_trans_6 = db.Column(db.Boolean, nullable=False)
     Trab_sim_1 = db.Column(db.Boolean, nullable=False)
-    Trab_sim_2 = db.Column(db.String(100), nullable=True) # El "nullable=True" evitara errores en caso de que la pregunta Trab_sim_1 sea false
+    Trab_sim_2 = db.Column(db.String(100), nullable=True) # El "nullable=True" evitara errores en caso de que la respuesta de Trab_sim_1 sea false
     Trab_sim_3 = db.Column(db.Boolean, nullable=False)
     Trab_sim_4 = db.Column(db.Boolean, nullable=False)
     Trab_sim_5 = db.Column(db.Boolean, nullable=False)
@@ -193,6 +193,11 @@ def register():
 
     return redirect(url_for('index'))
 
+@app.route('/logout', methods=['POST'])
+def logout():
+    session.pop('user_id', None)  # Elimina el ID del usuario de la sesión
+    return redirect(url_for('index'))  # Redirige a la página de inicio de sesión o a otra página adecuada
+
 @app.route('/get_unconfirmed_users')
 def get_unconfirmed_users():
     users = USinConfirmar.query.all()
@@ -204,7 +209,22 @@ def get_unconfirmed_users():
             'Rol': user.Rol
         } for user in users
     ])
-
+@app.route('/get_arts')
+@login_required
+@role_required('supervisor')
+def get_arts():
+    user_rut = session['user_id']
+    arts = Art.query.filter_by(Supervisor_rut=user_rut).all()
+    # Puedes devolver los datos en el formato que prefieras, por ejemplo, como JSON
+    return jsonify([
+        {
+            'Art_id': art.Art_id,
+            'Fecha_creacion': art.Fecha_creacion,
+            'Hora_creacion': art.Hora_creacion,
+            'Estado_cierre': art.Estado_cierre,
+            'Supervisor_rut': art.Supervisor_rut
+        } for art in arts
+    ])
 @app.route('/approve_user', methods=['POST'])
 def approve_user():
     data = request.json
