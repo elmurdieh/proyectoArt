@@ -4,6 +4,8 @@ from werkzeug.security import check_password_hash
 from werkzeug.security import generate_password_hash
 from functools import wraps
 from datetime import datetime
+from datetime import datetime, timezone
+import pytz
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Olasoymotopiz777@localhost/proyectoartv1'
@@ -41,23 +43,37 @@ class USinConfirmar(db.Model):
 
 class Art(db.Model):
     __tablename__ = 'art'
-    id = db.Column(db.Integer, primary_key=True)
-    fecha_creacion = db.Column(db.DateTime, nullable=False)
+    Art_id = db.Column(db.Integer, primary_key=True)
+    Fecha_creacion = db.Column(db.String(30), nullable=False)
+    Hora_creacion = db.Column(db.String(30), nullable=False)
+    Estado_cierre = db.Column(db.String(100), nullable=True)
+    Supervisor_rut = db.Column(db.String(12), nullable=False)
+
 
 class ArtResSup(db.Model):
     __tablename__ = 'art_res_sup'
-    id = db.Column(db.Integer, primary_key=True)
-    art_id = db.Column(db.Integer, db.ForeignKey('art.id'), nullable=False)
-    sup_asignado = db.Column(db.String(100), nullable=False)
-    empresa = db.Column(db.String(100), nullable=False)
-    gerencia = db.Column(db.String(100), nullable=False)
-    fecha = db.Column(db.Date, nullable=False)
-    superintendencia_direccion = db.Column(db.String(100), nullable=False)
-    hora_inicio = db.Column(db.Time, nullable=False)
-    trabajo_realizar = db.Column(db.String(100), nullable=False)
-    hora_termino = db.Column(db.Time, nullable=False)
-    lugar_especifico = db.Column(db.String(100), nullable=False)
-    art = db.relationship('Art', backref=db.backref('art_res_sup', lazy=True))
+    Art_id = db.Column(db.Integer, db.ForeignKey('art.Art_id'), primary_key=True)
+    Supervisor_rut = db.Column(db.String(12), nullable=False)
+    Sup_asignado = db.Column(db.String(100), nullable=False)
+    Gerencia = db.Column(db.String(100), nullable=False)
+    Superintendencia = db.Column(db.String(100), nullable=False)
+    Trab_realizar = db.Column(db.String(100), nullable=False)
+    Lug_esp = db.Column(db.String(100), nullable=False)
+    Empresa = db.Column(db.String(100), nullable=False)
+    Fecha = db.Column(db.String(30), nullable=False)
+    Hora_inicio = db.Column(db.String(15), nullable=False)
+    Hora_termino = db.Column(db.String(15), nullable=False)
+    Pre_trans_1 = db.Column(db.Boolean, nullable=False)
+    Pre_trans_2 = db.Column(db.Boolean, nullable=False)
+    Pre_trans_3 = db.Column(db.Boolean, nullable=False)
+    Pre_trans_4 = db.Column(db.Boolean, nullable=False)
+    Pre_trans_5 = db.Column(db.Boolean, nullable=False)
+    Pre_trans_6 = db.Column(db.Boolean, nullable=False)
+    Trab_sim_1 = db.Column(db.Boolean, nullable=False)
+    Trab_sim_2 = db.Column(db.String(100), nullable=True) # El "nullable=True" evitara errores en caso de que la pregunta Trab_sim_1 sea false
+    Trab_sim_3 = db.Column(db.Boolean, nullable=False)
+    Trab_sim_4 = db.Column(db.Boolean, nullable=False)
+    Trab_sim_5 = db.Column(db.Boolean, nullable=False)
 
 def login_required(f):
     @wraps(f)
@@ -100,7 +116,7 @@ def login():
         return redirect(url_for('interfaz_supervisor'))
     
     user = Gerente.query.filter_by(Rut=rut).first()
-    if user and check_password_hash(user.Contraseña, password):
+    if user and (user.Contraseña, password):
         session['user_id'] = user.Rut
         session['role'] = 'gerente'
         return redirect(url_for('interfaz_gerente'))
@@ -232,40 +248,92 @@ def approve_user():
         print(f"Error approving user: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+
+#aca se guardan las respuestas en la db 
+
 @app.route('/guardar_encuesta', methods=['POST'])
 @login_required
 @role_required('supervisor')
+
+#se toman las respuestas del html segun el nombre
 def guardar_encuesta():
-    sup_asignado = request.form['sup_asignado']
-    empresa = request.form['empresa']
-    gerencia = request.form['gerencia']
-    fecha = request.form['fecha']
-    superintendencia_direccion = request.form['superintendencia_direccion']
-    hora_inicio = request.form['hora_inicio']
-    trabajo_realizar = request.form['trabajo_realizar']
-    hora_termino = request.form['hora_termino']
-    lugar_especifico = request.form['lugar_especifico']
+    supervisor_rut = session['user_id']
+    supervisor_asignado = request.form.get('sup_asignado')
+    empresa = request.form.get('empresa')
+    gerencia = request.form.get('gerencia')
+    fecha = request.form.get('fecha')
+    superintendencia_direccion = request.form.get('superintendencia_direccion')
+    hora_inicio = request.form.get('hora_inicio')
+    trabajo_realizar = request.form.get('trabajo_realizar')
+    hora_termino = request.form.get('hora_termino')
+    lugar_especifico = request.form.get('lugar_especifico')
+    pretrans1 = int(request.form.get('grupo2-1'))
+    pretrans2 = int(request.form.get('grupo2-2'))
+    pretrans3 = int(request.form.get('grupo2-3'))
+    pretrans4 = int(request.form.get('grupo2-4'))
+    pretrans5 = int(request.form.get('grupo2-5'))
+    pretrans6 = int(request.form.get('grupo2-6'))
+    trabsim1 = int(request.form.get('grupo4-1-1'))
+    trabsim2 = request.form.get('tra-sim')
+    trabsim3 = int(request.form.get('grupo4-2-1'))
+    trabsim4 = int(request.form.get('grupo4-3-1'))
+    trabsim5 = int(request.form.get('grupo4-4-1'))
+    
+    # Definir la zona horaria de Chile
+    chile_tz = pytz.timezone('Chile/Continental')
+    now_chile = datetime.now(chile_tz)
 
-    nuevo_art = Art(nombre=trabajo_realizar, fecha_creacion=datetime.utcnow())
-    db.session.add(nuevo_art)
-    db.session.commit()
-
-    nuevo_art_res_sup = ArtResSup(
-        art_id=nuevo_art.id,
-        sup_asignado=sup_asignado,
-        empresa=empresa,
-        gerencia=gerencia,
-        fecha=fecha,
-        superintendencia_direccion=superintendencia_direccion,
-        hora_inicio=hora_inicio,
-        trabajo_realizar=trabajo_realizar,
-        hora_termino=hora_termino,
-        lugar_especifico=lugar_especifico
+    # Crear una instancia del modelo Art con los atributos correctos
+    nuevo_art = Art(
+        Fecha_creacion=now_chile.strftime('%Y-%m-%d'),
+        Hora_creacion=now_chile.strftime('%H:%M:%S'),
+        Estado_cierre=None,  # (Aun sin implementar) El estado cierre se tiene sera True cuando todos los trabajadores hayan firmador(aun sin implementar)
+        Supervisor_rut=supervisor_rut
     )
-    db.session.add(nuevo_art_res_sup)
-    db.session.commit()
+
+    try:
+        db.session.add(nuevo_art)
+        db.session.commit()  # Commit para obtener el Art_id generado
+        db.session.refresh(nuevo_art)  # Refrescar para obtener el Art_id asignado
+        
+        # Crear una instancia del modelo ArtResSup con el Art_id generado
+        nuevo_art_res_sup = ArtResSup(
+            Art_id=nuevo_art.Art_id,  # Asignar el Art_id generado
+            Supervisor_rut=supervisor_rut,
+            Sup_asignado=supervisor_asignado,
+            Gerencia=gerencia,
+            Superintendencia=superintendencia_direccion,
+            Trab_realizar=trabajo_realizar,
+            Lug_esp=lugar_especifico,
+            Empresa=empresa,
+            Fecha=fecha,
+            Hora_inicio=hora_inicio,
+            Hora_termino=hora_termino,
+            Pre_trans_1 = pretrans1,
+            Pre_trans_2 = pretrans2,
+            Pre_trans_3 = pretrans3,
+            Pre_trans_4 = pretrans4,
+            Pre_trans_5 = pretrans5,
+            Pre_trans_6 = pretrans6,
+            Trab_sim_1 = trabsim1,
+            Trab_sim_2 = trabsim2,
+            Trab_sim_3 = trabsim3,
+            Trab_sim_4 = trabsim4,
+            Trab_sim_5 = trabsim5
+
+            
+        )
+
+        db.session.add(nuevo_art_res_sup)
+        db.session.commit()
+        print('ART y ART Res Sup creados exitosamente', 'success')
+    except Exception as e:
+        db.session.rollback()
+        print('Error al crear el ART. Por favor, intente de nuevo.', 'error')
+        print(str(e))
 
     return redirect(url_for('art_supervisor_view'))
+
 
 
 if __name__ == '__main__':

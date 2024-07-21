@@ -58,11 +58,11 @@
           </table>
       </div>
   </div>
-    <button class="text-black p-2 w-full botonesIzquierdos">Lanzar Encuesta</button>
+  <form action="{{ url_for('guardar_encuesta') }}" method="POST">
+    <button class="text-black p-2 w-full botonesIzquierdos" type="submit">Lanzar Encuesta</button>
   </div>
   <div class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container1">
     <h1 class="text-center text-2xl font-bold mb-4 w-full">Planificaciones del Trabajo a Realizar</h1>
-    <form action="{{ url_for('guardar_encuesta') }}" method="POST">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label class="block mb-2">Supervisor Que Asigna el Trabajo</label>
@@ -101,10 +101,6 @@
           <input type="text" name="lugar_especifico" class="w-full p-2 border rounded-md text-center" required />
         </div>
       </div>
-      <div class="text-center mt-4">
-        <button type="submit" class="bg-primary text-primary-foreground py-2 px-20 rounded hover:bg-primary/80 transition-transform transform hover:scale-105">Lanzar Encuesta</button>
-      </div>
-    </form>
   </div>
   <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container2">
     <thead>
@@ -122,38 +118,38 @@
       <tr>
         <td class="border border-zinc-800 p-2">¿El trabajo que asignaré cuenta con un estándar, procedimiento y/o
           instructivo? Indicar nombre:</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-1"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-1"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-1" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-1" value="0"></td>
       </tr>
       <tr>
         <td class="border border-zinc-800 p-2">¿El personal que asignaré para realizar el trabajo, cuenta con las
           capacitaciones, competencias, salud compatible y/o acreditaciones requeridas?</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-2"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-2"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-2" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-2" value="0"></td>
       </tr>
       <tr>
         <td class="border border-zinc-800 p-2">¿Durante la planificación del trabajo, me aseguro de solicitar los
           permisos para ingresar a las áreas, intervenir equipos y/o interactuar con energías?</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-3"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-3"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-3" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-3" value="0"></td>
       </tr>
       <tr>
         <td class="border border-zinc-800 p-2">¿Verifiqué que el personal cuenta con los elementos requeridos para
           realizar la segregación y señalización del área de trabajo, según diseño?</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-4"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-4"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-4" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-4" value="0"></td>
       </tr>
       <tr>
         <td class="border border-zinc-800 p-2">¿El personal a mi cargo cuenta con sistema de comunicación de acuerdo al
           protocolo de emergencia del área?</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-5"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-5"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-5" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-5" value="0"></td>
       </tr>
       <tr>
         <td class="border border-zinc-800 p-2">¿El personal que asignaré para realizar el trabajo, cuenta con los EPP
           definidos en el procedimiento de trabajo?</td>
-        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-6"></td>
-        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-6"></td>
+        <td class="border border-zinc-800 p-2" id="YES"><input type="radio" name="grupo2-6" value="1"></td>
+        <td class="border border-zinc-800 p-2" id="NO"><input type="radio" name="grupo2-6" value="0"></td>
       </tr>
     </tbody>
   </table>
@@ -346,17 +342,18 @@
     </thead>
     <tbody>
       <tr>
-        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-1-1"></td>
-        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-1-1"></td>
-        <td class="border border-black p-2"><input type="text" class="w-full text-center"></td>
-        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-2-1"></td>
-        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-2-1"></td>
-        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-3-1"></td>
-        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-3-1"></td>
-        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-4-1"></td>
-        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-4-1"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-1-1" value="1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-1-1" value="0"></td>
+        <td class="border border-black p-2"><input type="text" class="w-full text-center" name="tra-sim"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-2-1" value="1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-2-1" value="0"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-3-1" value="1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-3-1" value="0"></td>
+        <td class="border border-black p-2 text-center" id="YES"><input type="radio" name="grupo4-4-1" value="1"></td>
+        <td class="border border-black p-2 text-center" id="NO"><input type="radio" name="grupo4-4-1" value="0"></td>
       </tr>
     </tbody>
   </table>
+</form>
 </body>
 </html>
