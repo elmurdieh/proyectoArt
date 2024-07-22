@@ -75,6 +75,12 @@ class ArtResSup(db.Model):
     Trab_sim_4 = db.Column(db.Boolean, nullable=False)
     Trab_sim_5 = db.Column(db.Boolean, nullable=False)
 
+class Trabajadores_asignados(db.Model):
+    __tablename__ = 'trabajadores_asignados'
+    Art_id = db.Column(db.Integer, db.ForeignKey('art.Art_id'), primary_key=True)
+    Trabajador_rut = db.Column(db.String(12), db.ForeignKey('trabajador.Rut'), primary_key=True)
+    Estado_firma_trabajador = db.Column(db.Boolean, nullable=True)
+
 def login_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -209,22 +215,59 @@ def get_unconfirmed_users():
             'Rol': user.Rol
         } for user in users
     ])
-@app.route('/get_arts')
+@app.route('/get_arts_supervisor')
 @login_required
 @role_required('supervisor')
-def get_arts():
+def get_arts_supervisor():
     user_rut = session['user_id']
     arts = Art.query.filter_by(Supervisor_rut=user_rut).all()
-    # Puedes devolver los datos en el formato que prefieras, por ejemplo, como JSON
-    return jsonify([
-        {
+    
+    results = []
+    for art in arts:
+        # Obtener los trabajadores asignados al Art
+        trabajadores_asignados = Trabajadores_asignados.query.filter_by(Art_id=art.Art_id).all()
+        trabajadores_nombres = [
+            Trabajador.query.get(trabajador.Trabajador_rut).Nombre for trabajador in trabajadores_asignados
+        ]
+        
+        results.append({
             'Art_id': art.Art_id,
             'Fecha_creacion': art.Fecha_creacion,
-            'Hora_creacion': art.Hora_creacion,
-            'Estado_cierre': art.Estado_cierre,
-            'Supervisor_rut': art.Supervisor_rut
-        } for art in arts
-    ])
+            'Trabajadores_asignados': trabajadores_nombres,
+            'Estado_cierre': art.Estado_cierre
+        })
+    
+    return jsonify(results)
+@app.route('/get_arts_trabajador')
+@login_required
+@role_required('trabajador')
+def get_arts_trabajador():
+    user_rut = session['user_id']
+    
+    # Obtener los arts donde el trabajador está asignado
+    arts_trabajador = Trabajadores_asignados.query.filter_by(Trabajador_rut=user_rut).all()
+    
+    results = []
+    for art_trabajador in arts_trabajador:
+        art = Art.query.get(art_trabajador.Art_id)
+        art_res_sup = ArtResSup.query.get(art_trabajador.Art_id)
+        
+        # Obtener los trabajadores asignados al Art
+        trabajadores_asignados = Trabajadores_asignados.query.filter_by(Art_id=art.Art_id).all()
+        trabajadores_nombres = [
+            Trabajador.query.get(trabajador.Trabajador_rut).Nombre for trabajador in trabajadores_asignados
+        ]
+        
+        results.append({
+            'Art_id': art.Art_id,
+            'Fecha_creacion': art.Fecha_creacion,
+            'Lug_esp': art_res_sup.Lug_esp,
+            'Trabajadores_asignados': trabajadores_nombres,
+            'Estado_cierre': art.Estado_cierre
+        })
+    
+    return jsonify(results)
+
 @app.route('/approve_user', methods=['POST'])
 def approve_user():
     data = request.json
@@ -268,7 +311,29 @@ def approve_user():
         print(f"Error approving user: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get_workers')
+@login_required
+@role_required('supervisor')
+def get_workers():
+    user_rut = session['user_id']
+    trabajadores = Trabajador.query.all()
+    # Puedes devolver los datos en el formato que prefieras, por ejemplo, como JSON
+    return jsonify([
+        {
+            'Nombre': trabajador.Nombre,
+            'Rut' : trabajador.Rut
+        } for trabajador in trabajadores
+    ])
+@app.route('/guardar_trabajadores', methods=['POST'])
+def guardar_trabajadores():
+    data = request.json
+    trabajadores = data.get('trabajadores', [])
 
+    if not trabajadores:
+        return jsonify({'error': 'No se enviaron trabajadores'}), 400
+
+    session['trabajadores'] = trabajadores
+    return jsonify({'message': 'Trabajadores almacenados en la sesión'})
 #aca se guardan las respuestas en la db 
 
 @app.route('/guardar_encuesta', methods=['POST'])
@@ -298,7 +363,7 @@ def guardar_encuesta():
     trabsim3 = int(request.form.get('grupo4-2-1'))
     trabsim4 = int(request.form.get('grupo4-3-1'))
     trabsim5 = int(request.form.get('grupo4-4-1'))
-    
+
     # Definir la zona horaria de Chile
     chile_tz = pytz.timezone('Chile/Continental')
     now_chile = datetime.now(chile_tz)
@@ -339,12 +404,19 @@ def guardar_encuesta():
             Trab_sim_2 = trabsim2,
             Trab_sim_3 = trabsim3,
             Trab_sim_4 = trabsim4,
-            Trab_sim_5 = trabsim5
-
-            
+            Trab_sim_5 = trabsim5 
         )
 
         db.session.add(nuevo_art_res_sup)
+
+        trabajadores = session.get('trabajadores', [])
+        for trabajador in trabajadores:
+            nuevo_art_trabajadores = Trabajadores_asignados(
+                Art_id=nuevo_art.Art_id,
+                Trabajador_rut=trabajador
+            )
+            db.session.add(nuevo_art_trabajadores)
+
         db.session.commit()
         print('ART y ART Res Sup creados exitosamente', 'success')
     except Exception as e:

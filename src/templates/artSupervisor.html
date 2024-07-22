@@ -40,7 +40,7 @@
     <div id="myModal" class="modal" onclick="closeModal(event)">
       <div class="modal-content">
           <span class="close" onclick="closeModal(event)">&times;</span>
-          <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="container5">
+          <table class="max-w-4xl mx-auto p-4 rounded-lg shadow-md" id="workerTable">
             <thead>
               <tr>
                 <th colspan="3" class="border border-zinc-800 p-2" id="titulo2">Asignar Trabajadores al Art</th>
@@ -54,8 +54,10 @@
                 <th class="border border-zinc-800 p-2">Asignar</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody id="workerTableBody"></tbody>
           </table>
+          <button onclick="verTrabajadores()" class="p-3 text-center">Ver Trabajadores Asignados</button>
+          <button onclick="enviarTrabajadores()" class="p-3 text-center ml-10">Enviar Trabajadores</button>
       </div>
   </div>
   <form action="{{ url_for('guardar_encuesta') }}" method="POST">

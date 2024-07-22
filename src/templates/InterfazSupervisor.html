@@ -164,39 +164,31 @@
   <script>
     //Aca se cargan en la interfaz todos los Art  
     document.addEventListener('DOMContentLoaded', () => {
-      const loadArts = async () => {
-        const response = await fetch('/get_arts');
+    const loadArtsSupervisor = async () => {
+        const response = await fetch('/get_arts_supervisor');
         if (!response.ok) {
-          console.error('Error fetching data:', response.statusText);
-          return;
+            console.error('Error fetching data:', response.statusText);
+            return;
         }
         const arts = await response.json();
-        const tbody = document.querySelector('table tbody');
+        const tbody = document.querySelector('tbody');
         tbody.innerHTML = '';
         arts.forEach(art => {
-          const row = `
-            <tr>
-              <td class="p-2 border-b">${art.Fecha_creacion}</td>
-              <td class="p-2 border-b">${art.Hora_creacion}</td>
-              <td class="p-2 border-b">${art.Estado_cierre || 'N/A'}</td>
-              <td class="p-2 border-b">
-                <button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
-                  Ver Mas Informacion
-                </button>
-              </td>
-              <td class="p-2 border-b">
-                <button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
-                  Descargar
-                </button>
-              </td>
-            </tr>
-          `;
-          tbody.innerHTML += row;
+            const trabajadoresAsignados = art.Trabajadores_asignados.join(', ');
+            const row = `
+                <tr>
+                    <td class="p-2 border-b">${art.Fecha_creacion}</td>
+                    <td class="p-2 border-b">${trabajadoresAsignados}</td>
+                    <td class="p-2 border-b"><button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">Cerrar Art</button></td>
+                    <td class="p-2 border-b"><button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">Ver Mas Informacion</button></td>
+                    <td class="p-2 border-b"><button onclick="alert('${art.Art_id}')" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">Descargar</button></td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
         });
-      };
-    
-      loadArts();
-    });
+    };
+    loadArtsSupervisor();
+});
   </script>
 </body>
 </html>

@@ -128,7 +128,7 @@
                     <th class="p-2 border-b">Firmar</th>
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody id="tablaArt"></tbody>
               </table>
             </div>
           </section>
@@ -208,4 +208,49 @@
     </main>
   </div>
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const loadArtsTrabajador = async () => {
+        const response = await fetch('/get_arts_trabajador');
+        if (!response.ok) {
+            console.error('Error fetching data:', response.statusText);
+            return;
+        }
+        const arts = await response.json();
+        const tbody = document.querySelector('tbody');
+        tbody.innerHTML = '';
+        arts.forEach(art => {
+            const trabajadoresAsignados = art.Trabajadores_asignados.join(', ');
+            const row = `
+                <tr>
+                    <td class="p-2 border-b">${art.Fecha_creacion}</td>
+                    <td class="p-2 border-b">${art.Lug_esp}</td>
+                    <td class="p-2 border-b">${trabajadoresAsignados}</td>
+                    <td class="p-2 border-b">
+                        <button onclick="realizarVerArt(${art.Art_id})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
+                            Realizar / Ver Art
+                        </button>
+                    </td>
+                    <td class="p-2 border-b">${art.Estado_cierre || ''}</td>
+                    <td class="p-2 border-b">
+                        <button onclick="firmarArt(${art.Art_id})" class="bg-green-500 text-white py-1 px-2 rounded hover:bg-green-600">
+                            Firmar
+                        </button>
+                    </td>
+                </tr>
+            `;
+            tbody.innerHTML += row;
+        });
+    };
+    loadArtsTrabajador();
+});
+
+function realizarVerArt(artId) {
+    // Lógica para realizar o ver Art
+}
+
+function firmarArt(artId) {
+    // Lógica para firmar Art
+}
+</script>
 </html>
