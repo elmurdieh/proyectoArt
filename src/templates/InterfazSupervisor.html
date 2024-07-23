@@ -120,13 +120,6 @@
                 </div>
               `;
               break;
-            case 'Configuracion':
-              mainContent.innerHTML = `
-                <header class="flex justify-between items-center mb-6">
-                  <h1 class="text-2xl font-bold">Estas en Configuracion</h1>
-                </header>
-              `;
-              break;
             case 'Cerrar Sesion':
               mainContent.innerHTML = `
                 <header class="flex justify-between items-center mb-6">
@@ -149,7 +142,6 @@
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded bg-secondary text-secondary-foreground">Menu Art</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Interfaz</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Controles Criticos</a></li>
-          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Configuracion</a></li>
           <li class="mb-2">
             <form action="/logout" method="post">
               <button type="submit" class="block py-2 px-4 rounded hover:bg-primary/80">Cerrar Sesión</button>

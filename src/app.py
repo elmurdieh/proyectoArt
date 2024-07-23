@@ -6,6 +6,7 @@ from functools import wraps
 from datetime import datetime
 from datetime import datetime, timezone
 import pytz
+
 #aca se hace la conexion a la base de datos
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://admin:Olasoymotopiz777@localhost/proyectoartv1' # usuario/contraseña/localhost dejarlo como esta/nombre de la DB
@@ -16,6 +17,7 @@ class Trabajador(db.Model):
     __tablename__ = 'trabajador'
     Rut = db.Column(db.String(12), primary_key=True)
     Nombre = db.Column(db.String(300), nullable=False)
+    Cargo = db.Column(db.String(50),nullable=False)
     Correo_electronico = db.Column(db.String(300), nullable=False)
     Contraseña = db.Column(db.String(300), nullable=False)
 
@@ -23,6 +25,7 @@ class Supervisor(db.Model):
     __tablename__ = 'supervisor'
     Rut = db.Column(db.String(12), primary_key=True)
     Nombre = db.Column(db.String(300), nullable=False)
+    Cargo = db.Column(db.String(50),nullable=False)
     Correo_electronico = db.Column(db.String(300), nullable=False)
     Contraseña = db.Column(db.String(300), nullable=False)
 
@@ -37,6 +40,7 @@ class USinConfirmar(db.Model):
     __tablename__ = 'u_sinconfirmar'
     Rut = db.Column(db.String(12), primary_key=True)
     Nombre = db.Column(db.String(100), nullable=False)
+    Cargo = db.Column(db.String(50),nullable=False)
     Contraseña = db.Column(db.String(255), nullable=False)
     Correo_electronico = db.Column(db.String(255), nullable=False)
     Rol = db.Column(db.String(25), nullable=False)
@@ -73,7 +77,7 @@ class ArtResSup(db.Model):
     Trab_sim_2 = db.Column(db.String(100), nullable=True) # El "nullable=True" evitara errores en caso de que la respuesta de Trab_sim_1 sea false
     Trab_sim_3 = db.Column(db.Boolean, nullable=False)
     Trab_sim_4 = db.Column(db.Boolean, nullable=False)
-    Trab_sim_5 = db.Column(db.Boolean, nullable=False)
+    Trab_sim_5 = db.Column(db.Boolean, nullable=False)   
 
 class Trabajadores_asignados(db.Model):
     __tablename__ = 'trabajadores_asignados'
@@ -141,6 +145,12 @@ def interfaz_trabajador():
     user = Trabajador.query.get(user_id)
     return render_template('interfazTrabajador.html',nombre=user.Nombre)
 
+@app.route('/interfaz_trabajador/artTrabajador')
+@login_required
+@role_required('trabajador')
+def art_trabajador_view():
+    return render_template('artTrabajador.html')
+
 @app.route('/interfaz_supervisor')
 @login_required
 @role_required('supervisor')
@@ -149,7 +159,8 @@ def interfaz_supervisor():
     user = Supervisor.query.get(user_id)
     return render_template('interfazSupervisor.html',nombre=user.Nombre)
 
-@app.route('/interfaz_supervisor/artSupervisor')
+
+@app.route('/interfazSupervisor/artSupervisor')
 @login_required
 @role_required('supervisor')
 def art_supervisor_view():
@@ -170,11 +181,42 @@ def interfaz_gerente():
 
 @app.route('/register', methods=['POST'])
 def register():
+    def calcular_digito_verificador(rut_sin_dv):
+        rut_reverso = list(map(int, reversed(rut_sin_dv)))
+        multiplicadores = [2, 3, 4, 5, 6, 7]
+        suma = sum(d * multiplicadores[i % len(multiplicadores)] for i, d in enumerate(rut_reverso))
+        resto = suma % 11
+        dv = 11 - resto
+        if dv == 11:
+            return '0'
+        elif dv == 10:
+            return 'K'
+        else:
+            return str(dv)
+    def verificar_rut(rut_completo):
+        try:
+            rut_numero, rut_dv = rut_completo.strip().upper().split('-')
+        except ValueError:
+            return False
+        if not rut_numero.isdigit():
+            return False
+        dv_calculado = calcular_digito_verificador(rut_numero)
+
+        return dv_calculado == rut_dv
+    
     nombre = request.form['nombre']
     rut = request.form['rut']
     correo = request.form['correo']
+    cargo = request.form['cargo']
     password = request.form['password']
     rol = request.form['rol']
+    
+    if verificar_rut(rut):
+        print(f"El RUT {rut} es válido.")
+    else:
+        print(f"El RUT {rut} no es válido.")
+        return redirect(url_for('index'))
+
 
     if Trabajador.query.filter_by(Rut=rut).first() or Supervisor.query.filter_by(Rut=rut).first() or Gerente.query.filter_by(Rut=rut).first() or USinConfirmar.query.filter_by(Rut=rut).first():
         print('El RUT ya está registrado', 'error')
@@ -184,6 +226,7 @@ def register():
         Nombre=nombre,
         Rut=rut,
         Correo_electronico=correo,
+        Cargo=cargo,
         Contraseña=generate_password_hash(password),
         Rol=rol
     )
@@ -286,6 +329,7 @@ def approve_user():
         new_user = Supervisor(
             Rut=user.Rut,
             Nombre=user.Nombre,
+            Cargo = user.Cargo,
             Correo_electronico=user.Correo_electronico,
             Contraseña=user.Contraseña
         )
@@ -293,6 +337,7 @@ def approve_user():
         new_user = Trabajador(
             Rut=user.Rut,
             Nombre=user.Nombre,
+            Cargo = user.Cargo,
             Correo_electronico=user.Correo_electronico,
             Contraseña=user.Contraseña
         )
@@ -335,6 +380,12 @@ def guardar_trabajadores():
     session['trabajadores'] = trabajadores
     return jsonify({'message': 'Trabajadores almacenados en la sesión'})
 #aca se guardan las respuestas en la db 
+
+@app.route('/guardar_encuesta_trabajador', methods=['POST'])
+@login_required
+@role_required('trabajador')
+def guardar_encuesta_supervisor():
+    pass
 
 @app.route('/guardar_encuesta', methods=['POST'])
 @login_required

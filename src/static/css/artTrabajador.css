@@ -1,0 +1,96 @@
+
+button{
+    border: solid 1px rgb(255, 209, 167);
+    border-radius: 4px;
+    font-size: 20px;
+}
+button:hover{
+    background-color: rgb(255, 205, 158);
+}
+input{
+    border: solid 1px rgb(14, 106, 143);
+    border-radius: 5px;;
+}
+#container1{
+    margin-top: 100px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;;
+}
+h1{
+    border: solid 2px rgb(14, 106, 143);;
+    background-color: rgb(13, 102, 138);
+    color: white;
+    border-radius: 5px;
+}
+#container2{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+tbody{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+}
+tr{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+}
+th{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+}
+#titulo2{
+    border: solid 2px rgb(14, 106, 143);;
+    background-color: rgb(13, 102, 138);
+    color: white;
+    border-radius: 5px;
+    font-size: 23px;
+}
+#encuesta3{
+    margin-left: 20px;
+}
+.encuesta3{
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+#container4{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+#container5{
+    margin-top: 50px;
+    border: solid 2px rgb(14, 106, 143);
+    border-radius: 5px;
+    margin-bottom: 50px;
+}
+#YES{
+    background-color: rgb(182, 245, 201);
+}
+#NO{
+    background-color: rgb(252, 161, 161);
+}
+#botonesArriba{
+    position: fixed;
+}
+.botonesIzquierdos{
+    margin-top: 50px;
+    margin-left: 10px;
+}
+input[type=radio]{
+    transform: scale(1.5);
+}
+.boton-yaFirmado{
+    color: rgb(43, 181, 43);
+    border: solid 1px rgb(43, 181, 43);
+    border-radius: 5px;
+}
+.boton-yaFirmado:hover{
+    background-color: rgb(15, 97, 15);
+}

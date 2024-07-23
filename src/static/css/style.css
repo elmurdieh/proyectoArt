@@ -1,0 +1,120 @@
+/* Aplica el color de fondo al elemento html */
+html {
+    background-color: #8e0a0a;
+}
+
+/* Estilos para los títulos de los pasos */
+.paso-titulo {
+    font-weight: 1000px; /* Peso de la fuente */
+    color: white; /* Color de texto blanco */
+    margin-bottom: 10px; /* Margen inferior */
+    font-size: 2.5rem;
+    font-family: 'Rubik Dirt', cursive;
+}
+
+/* Estilos para el contenedor principal */
+.contenedor1 {
+    width: 1400px;
+    margin: auto;
+    border: 3px solid rgb(13, 7, 7);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 20px;
+    background-color: rgb(199, 193, 193); /* Color de fondo para el contenedor */
+}
+
+/* Estilos para la tarjeta */
+.tarjeta {
+    background-color: rgb(214, 88, 68);
+    padding: 80px;
+    width: 1300px;
+    margin-bottom: 20px; /* Añadido para separación entre tarjeta y formulario */
+}
+
+.tarjeta img {
+    max-width: 300px;
+    vertical-align: middle;
+}
+
+.tarjeta h1 {
+    display: inline-block;
+    margin: 0 0 0 20px;
+    font-size: 1.8em;
+    vertical-align: middle;
+}
+
+/* Estilos para los elementos de pregunta */
+.pregunta-contenedor {
+    margin-bottom: 20px;
+}
+
+.pregunta-titulo {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.pregunta-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.pregunta-texto {
+    flex: 1;
+    margin-right: 10px;
+}
+
+/* Estilos para títulos dentro de columnas de Bootstrap */
+.col-md-2 h4 {
+    font-size: 16px; /* Tamaño de fuente */
+    max-height: 60px; /* Altura máxima */
+    overflow: hidden; /* Oculta el exceso de texto si es necesario */
+    margin-bottom: 10px; /* Margen inferior */
+}
+
+/* Estilos para grupo de botones */
+.btn-group {
+    margin-top: 10px; /* Margen superior para el grupo de botones */
+}
+
+/* Botones básicos */
+.btn {
+    margin: 0 5px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    font-weight: bold;
+    border: 2px solid transparent; /* Añadido para el borde activo */
+}
+
+/* Estilo para el botón "Sí" (verde) */
+.btn-outline-success {
+    background-color: transparent;
+    border-color: #28a745; /* Verde */
+    color: #28a745;
+}
+
+/* Estilo para el botón "No" (rojo) */
+.btn-outline-danger {
+    background-color: transparent;
+    border-color: #dc3545; /* Rojo */
+    color: #dc3545;
+}
+
+/* Estilo para el botón activo */
+.btn.active {
+    background-color: #000; /* Color de fondo para el estado activo */
+    color: #fff; /* Color del texto para el estado activo */
+}
+
+/* Estilo para el botón "Sí" activo */
+.btn.active.btn-outline-success {
+    background-color: #218838; /* Verde más oscuro */
+    border-color: #1e7e34; /* Verde más oscuro para el borde */
+}
+
+/* Estilo para el botón "No" activo */
+.btn.active.btn-outline-danger {
+    background-color: #c82333; /* Rojo más oscuro */
+    border-color: #bd2130; /* Rojo más oscuro para el borde */
+}

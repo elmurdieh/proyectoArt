@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='CSS/style.css') }}">
+    <script src="{{ url_for('static', filename='js/preguntas.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&family=Rubik+Dirt&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="contenedor1">
+        <table class="tarjeta">
+            <tr>
+                <td><img src="{{ url_for('static', filename='img/logoCiquimet.jpeg') }}" alt="Logo"></td>
+                <td><h1 class="paso-titulo">ART | Utilicemos los Controles Críticos que Salvan Vidas</h1></td>
+            </tr>
+        </table>
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="paso-titulo">PASO 1: PLANIFICACIÓN DEL TRABAJO A REALIZAR</h2>
+            </div>
+        </div>
+        <form class="row g-3">
+            <!-- Filas del formulario -->
+            <div class="col-md-6">
+                <label for="supervisor" class="form-label">Supervisor que asigna el trabajo</label>
+                <input type="text" class="form-control" id="supervisor" name="supervisor">
+            </div>
+            <div class="col-md-6">
+                <label for="empresa" class="form-label">Empresa</label>
+                <input type="text" class="form-control" id="empresa" name="empresa">
+            </div>
+            <div class="col-md-6">
+                <label for="gerencia" class="form-label">Gerencia</label>
+                <input type="text" class="form-control" id="gerencia" name="gerencia">
+            </div>
+            <div class="col-md-3">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input type="date" class="form-control" id="fecha" name="fecha">
+            </div>
+            <div class="col-md-3">
+                <label for="hora_inicio" class="form-label">Hora Inicio</label>
+                <input type="time" class="form-control" id="hora_inicio" name="hora_inicio">
+            </div>
+            <div class="col-md-3">
+                <label for="hora_termino" class="form-label">Hora Término</label>
+                <input type="time" class="form-control" id="hora_termino" name="hora_termino">
+            </div>
+            <div class="col-md-6">
+                <label for="superintendencia" class="form-label">Superintendencia / Dirección</label>
+                <input type="text" class="form-control" id="superintendencia" name="superintendencia">
+            </div>
+            <div class="col-md-6">
+                <label for="lugar_especifico" class="form-label">Lugar Específico</label>
+                <input type="text" class="form-control" id="lugar_especifico" name="lugar_especifico">
+            </div>
+            <div class="col-md-12">
+                <label for="trabajo_realizar" class="form-label">Trabajo a Realizar</label>
+                <input type="text" class="form-control" id="trabajo_realizar" name="trabajo_realizar">
+            </div>
+        <div class="col-md-12">
+            <h2 class="paso-titulo">PASO 2: RIESGOS Y CONTROLES CRÍTICOS</h2>
+            <p >Si un control crítico no está presente, no puedes iniciar tu trabajo y debes comunicarte con el supervisor a cargo y juntos definir el control a implementar.</p>
+        </div>
+        <div class="col-md-12">
+            <p ><strong>PREGUNTAS TRANSVERSALES, APLICABLE A TODOS LOS RIESGOS.</strong></p>
+            <p>Las siguientes preguntas son transversales, responde siempre, independientemente del Riesgo Crítico al cual estés expuesto.</p>
+        </div>
+        <div class="row">
+            <!-- Contenedor de preguntas para supervisor -->
+            <div class="col-md-6 pregunta-contenedor">
+                <h3 class="pregunta-titulo">Preguntas para Supervisor(a)</h3>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿El trabajo que asignare cuenta con un estándar, procedimiento y/o instructivo?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿El personal que asignare para realizar el trabajo, cuenta con las capacidades, competencias, salud compatible y/o acreditaciones requeridas?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Durante la planificación del trabajo, me aseguro de solicitar los permisos para ingresar a las áreas, intervenir equipos y/o interactuar con energias?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Verifiqué que el personal cuenta con los elementos requeridos para realizar la segregación y señalización del área de trabajo, según diseño?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿El personal a mi cargo cuenta con sistema de comunicación de acuerdo al protocolo de emergencia del área?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿El personal que asignaré para realizar el trabajo, cuenta con los EPP definidos en el procedimiento de trabajo?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenedor de preguntas para trabajador -->
+            <div class="col-md-6 pregunta-contenedor">
+                <h3 class="pregunta-titulo">Preguntas para Trabajador(a)</h3>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Conozco el estándar, procedimiento y/o instructivo del trabajo que ejecutaré?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Cuento con las competencias y salud compatible para ejecutar el trabajo?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Durante la planificación del trabajo, me aseguré de que se gestionaran los permisos para ingresar a las áreas, intervenir equipos y/o interactuar con energias?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Cuento con los elementos requeridos para realizar la segregación y señalización del área de trabajo según diseño?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Cuento con sistema de comunicación de acuerdo al protocolo de emergencia del área?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="pregunta-row">
+                    <div class="col-md-6 pregunta-texto">
+                        <p>¿Cuento con los EPP definidos en el procedimiento de trabajo?</p>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p><strong>RIESGOS CRÍTICOS ESPECÍFICOS DEL TRABAJO.</strong></p>
+            <p>Identifique los riesgos criticos del trabajo a ejecutar y verificar las preguntas según los "Controles Criticos que Salvan Vidas".</p>
+        </div>
+        <!-- Tabla de supervisores -->
+        <div class="row">
+            <!-- Sección de Supervisor -->
+            <div class="col-md-12">
+                <h3>Supervisor</h3>
+            </div>
+            <!-- Primera tabla para Supervisor -->
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cod: Num (type)</th>
+                            <th>N°</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control"></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Segunda tabla para Supervisor -->
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cod: Num (type)</th>
+                            <th>N°</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control"></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 mt-4">
+                <h3>Trabajador</h3>
+            </div>
+            <!-- Primera tabla para Trabajador -->
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cod: Num (type)</th>
+                            <th>N°</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control"></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Segunda tabla para Trabajador -->
+            <div class="col-md-6">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Cod: Num (type)</th>
+                            <th>N°</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="text" class="form-control"></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="number" class="form-control" min="1" max="12"></td>
+                            <td>
+                                <div class="btn-group" role="group" aria-label="Sí o No">
+                                    <button type="button" class="btn btn-outline-success">Sí</button>
+                                    <button type="button" class="btn btn-outline-danger">No</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-12 mt-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="paso-titulo">PASO 3: OTROS RIESGOS</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h4>Riesgos</h4>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <div class="col-md-6">
+                    <h4>Medidas de Control</h4>
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="paso-titulo">PASO 4: TRABAJOS EN SIMULTÁNEO</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>¿Existen trabajos en Simultáneo?</th>
+                                <th>Si su respuesta es SI, describa el contexto del trabajo en simultáneo y verifique.</th>
+                                <th>¿Se realizó la coordinación con el Líder de la cuadrilla que realiza el trabajo en Simultáneo?</th>
+                                <th>¿Se realizó la verificación cruzada de Controles Críticos?</th>
+                                <th>¿Se comunicó a todos los trabajadores las acciones de control que debe aplicar en trabajos simultáneos?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Sí o No">
+                                        <button type="button" class="btn btn-outline-success">Sí</button>
+                                        <button type="button" class="btn btn-outline-danger">No</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <textarea class="form-control" rows="3"></textarea>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Sí o No">
+                                        <button type="button" class="btn btn-outline-success">Sí</button>
+                                        <button type="button" class="btn btn-outline-danger">No</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Sí o No">
+                                        <button type="button" class="btn btn-outline-success">Sí</button>
+                                        <button type="button" class="btn btn-outline-danger">No</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="btn-group" role="group" aria-label="Sí o No">
+                                        <button type="button" class="btn btn-outline-success">Sí</button>
+                                        <button type="button" class="btn btn-outline-danger">No</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 mt-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="paso-titulo">PASO 5: CONDICIONES FÍSICAS</h2>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <h4>LÍDER:</h4>
+                </div>
+                <div class="col-md-2">
+                    <h4>Nombre:</h4>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <h4>Cargo:</h4>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <h4>¿Verifiqué las condiciones fisicas y psicológicas de todo el Equipo Ejecutor del Trabajo?:</h4>
+                    <div class="btn-group" role="group" aria-label="Sí o No">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4>Firma:</h4>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-2">
+                    <h4>TRABAJADOR:</h4>
+                </div>
+                <div class="col-md-2">
+                    <h4>Nombre:</h4>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <h4>Cargo:</h4>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-md-4">
+                    <h4>Confirmo que estoy en condiciones de hacer el trabajo:</h4>
+                    <div class="btn-group" role="group" aria-label="Sí o No">
+                        <button type="button" class="btn btn-outline-success">Sí</button>
+                        <button type="button" class="btn btn-outline-danger">No</button>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <h4>Firma:</h4>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <p><strong>NINGÚN TRABAJO PODRÁ INICIAR SI UN CONTROL CRÍTICO NO ESTÁ IMPLEMENTADO. LEVANTE TARJETA VERDE</strong></p>
+        </div>
+        <!-- Botones de limpiar y enviar -->
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">Limpiar</button>
+            </div>
+            <div class="col-md-6 text-right">
+                <button type="submit" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-07-2024 a las 06:28:26
+-- Tiempo de generación: 23-07-2024 a las 22:08:10
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -45,7 +45,9 @@ INSERT INTO `art` (`Art_id`, `Fecha_creacion`, `Hora_creacion`, `Estado_cierre`,
 (5, '2024-07-20', '21:04:30', NULL, '26197953-5'),
 (6, '2024-07-20', '22:13:36', NULL, '26197953-5'),
 (7, '2024-07-20', '22:27:46', NULL, '26197953-5'),
-(8, '2024-07-20', '22:32:53', NULL, '26197953-5');
+(8, '2024-07-20', '22:32:53', NULL, '26197953-5'),
+(9, '2024-07-21', '21:33:06', NULL, '26197953-5'),
+(10, '2024-07-21', '21:37:23', NULL, '26197953-5');
 
 -- --------------------------------------------------------
 
@@ -90,7 +92,9 @@ INSERT INTO `art_res_sup` (`Art_id`, `Supervisor_rut`, `Nombre`, `Cargo`, `Cond_
 (4, '26197953-5', '', '', 0, 0, 'Robert', 'yo', 'WSS', 'mineria', 'mi casa', 'ciquimet', '2024-07-20', '21:31', '23:20', 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0),
 (5, '26197953-5', '', '', 0, 0, 'yo', 'Choro', 'yo', 'las weas', 'mi casa', 'ciquimet', '2024-07-09', '21:04', '23:04', 0, 0, 0, 0, 0, 0, 0, '', 0, 0, 0),
 (6, '26197953-5', '', '', 0, 0, 'EL WEA', 'yo', 'WSS', 'mineria', 'mi casa', 'ciquimet', '2024-07-30', '17:13', '23:13', 1, 1, 1, 1, 1, 0, 0, '', 0, 0, 0),
-(8, '26197953-5', '', '', 0, 0, 'EL SHORO ROBERT', 'Choro', 'WSS', 'mineria', 'Laboratorio', 'ciquimet', '2024-07-03', '03:37', '00:37', 1, 1, 1, 1, 1, 1, 1, 'SI existe trabajo en simultaneo HOla', 1, 1, 0);
+(8, '26197953-5', '', '', 0, 0, 'EL SHORO ROBERT', 'Choro', 'WSS', 'mineria', 'Laboratorio', 'ciquimet', '2024-07-03', '03:37', '00:37', 1, 1, 1, 1, 1, 1, 1, 'SI existe trabajo en simultaneo HOla', 1, 1, 0),
+(9, '26197953-5', '', '', 0, 0, 'EL SHORO ROBERT', 'Choro', 'WSS', 'las weas', 'Laboratorio calama', 'ciquimet', '2024-07-10', '00:37', '01:32', 1, 1, 1, 1, 1, 1, 1, '', 1, 1, 1),
+(10, '26197953-5', '', '', 0, 0, 'EL SHORO Jaime', 'Choro', 'yo', 'las weas', 'Laboratorio calama', 'ciquimet', '2024-07-24', '21:41', '00:37', 1, 1, 1, 1, 1, 1, 0, 'HOLA YOUTUBE', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -170,6 +174,7 @@ CREATE TABLE `riesgos_criticos_tra` (
 CREATE TABLE `supervisor` (
   `Nombre` varchar(300) NOT NULL,
   `Rut` varchar(12) NOT NULL,
+  `Cargo` varchar(50) NOT NULL,
   `Correo_electronico` varchar(300) NOT NULL,
   `Contraseña` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -178,8 +183,9 @@ CREATE TABLE `supervisor` (
 -- Volcado de datos para la tabla `supervisor`
 --
 
-INSERT INTO `supervisor` (`Nombre`, `Rut`, `Correo_electronico`, `Contraseña`) VALUES
-('Robert Mauricio', '26197953-5', 'alvarezramirezr764@gmail.com', 'scrypt:32768:8:1$U0WaF8pkiFNyKq3W$843283c74c5b419a2d38eda571523af6469aa583c7cd4ffb849f78092fae501073cacfa0fae53160a71b62fa62deb960a907b24b0bfde628c7b7363c6e3d3d5f');
+INSERT INTO `supervisor` (`Nombre`, `Rut`, `Cargo`, `Correo_electronico`, `Contraseña`) VALUES
+('Robert 2', '24756253-2', 'Supervisor', 'alvarezramirezr764@gmail.com', 'scrypt:32768:8:1$R5lpjS03d1SEebnM$40d78230d996635fc8553b33b7a05f6e23aee55d36de1bf7b224f88b38718dcc076614c966c34a01379f3cab281bd704f5aaacb92ce4e05135db64a589cc09d7'),
+('Robert Mauricio', '26197953-5', '', 'alvarezramirezr764@gmail.com', 'scrypt:32768:8:1$U0WaF8pkiFNyKq3W$843283c74c5b419a2d38eda571523af6469aa583c7cd4ffb849f78092fae501073cacfa0fae53160a71b62fa62deb960a907b24b0bfde628c7b7363c6e3d3d5f');
 
 -- --------------------------------------------------------
 
@@ -190,6 +196,7 @@ INSERT INTO `supervisor` (`Nombre`, `Rut`, `Correo_electronico`, `Contraseña`) 
 CREATE TABLE `trabajador` (
   `Nombre` varchar(300) NOT NULL,
   `Rut` varchar(12) NOT NULL,
+  `Cargo` varchar(50) NOT NULL,
   `Correo_electronico` varchar(300) NOT NULL,
   `Contraseña` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -198,10 +205,11 @@ CREATE TABLE `trabajador` (
 -- Volcado de datos para la tabla `trabajador`
 --
 
-INSERT INTO `trabajador` (`Nombre`, `Rut`, `Correo_electronico`, `Contraseña`) VALUES
-('male07', '26197953-1', 'correofalso1@ciquimet.com', 'scrypt:32768:8:1$bZSiTgHbqMiKMfut$231ca9ac28a388dc90f6619a9a1c80745f5fb724ef2ec2010e03a186e910208baf2fae2a13f67a012ffa5d4a50a78e85ecba0435f632ae291afff03f3e2ee6c0'),
-('3060Ti edicion pendrive', '26197953-2', 'correofalso2@ciquimet.com', 'scrypt:32768:8:1$NT6GQ16FavFlH5GU$b3a194f3bb29f00ff5e0ec0dec0fdd2571542cd9b9d923672ee487b80bbf77907e6c3936c0241c94fe4e0e5f21966b07eee4fd1839274e2925e0b39d0ee2ef40'),
-('Chocolate Trencito', '26197953-3', 'correofalso3@ciquimet.com', 'scrypt:32768:8:1$RGmpwpTrmRaiYNYD$e3df69695889a9abdeb75a4712b51d19f8fa8927d191f770a46af6bccb94ac85768ff649b65aed5f0c8c1fbc126f4fb89b65e8160be17c2a0f190f54860b0638');
+INSERT INTO `trabajador` (`Nombre`, `Rut`, `Cargo`, `Correo_electronico`, `Contraseña`) VALUES
+('male07', '26197953-1', '', 'correofalso1@ciquimet.com', 'scrypt:32768:8:1$bZSiTgHbqMiKMfut$231ca9ac28a388dc90f6619a9a1c80745f5fb724ef2ec2010e03a186e910208baf2fae2a13f67a012ffa5d4a50a78e85ecba0435f632ae291afff03f3e2ee6c0'),
+('3060Ti edicion pendrive', '26197953-2', '', 'correofalso2@ciquimet.com', 'scrypt:32768:8:1$NT6GQ16FavFlH5GU$b3a194f3bb29f00ff5e0ec0dec0fdd2571542cd9b9d923672ee487b80bbf77907e6c3936c0241c94fe4e0e5f21966b07eee4fd1839274e2925e0b39d0ee2ef40'),
+('Chocolate Trencito', '26197953-3', '', 'correofalso3@ciquimet.com', 'scrypt:32768:8:1$RGmpwpTrmRaiYNYD$e3df69695889a9abdeb75a4712b51d19f8fa8927d191f770a46af6bccb94ac85768ff649b65aed5f0c8c1fbc126f4fb89b65e8160be17c2a0f190f54860b0638'),
+('Es Fantastico', '26197953-4', '', 'correoFalso25@ciquimet.com', 'scrypt:32768:8:1$a52pareMoZ3WDRRn$13dbda9cf0dc27930486c4e9d1b225b24466c98c168a0f91e1a98a99e13617505fb4b5b8478d37f3f11e40f7b72bbd388ed0162fe5d2dd3eb3ca914b312b567f');
 
 -- --------------------------------------------------------
 
@@ -210,10 +218,19 @@ INSERT INTO `trabajador` (`Nombre`, `Rut`, `Correo_electronico`, `Contraseña`) 
 --
 
 CREATE TABLE `trabajadores_asignados` (
-  `Art_id` int(5) NOT NULL,
+  `Art_id` int(50) NOT NULL,
   `Trabajador_rut` varchar(12) NOT NULL,
   `Estado_firma_trabajador` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `trabajadores_asignados`
+--
+
+INSERT INTO `trabajadores_asignados` (`Art_id`, `Trabajador_rut`, `Estado_firma_trabajador`) VALUES
+(10, '26197953-1', 0),
+(10, '26197953-2', 0),
+(10, '26197953-3', 0);
 
 -- --------------------------------------------------------
 
@@ -224,6 +241,7 @@ CREATE TABLE `trabajadores_asignados` (
 CREATE TABLE `u_sinconfirmar` (
   `Nombre` varchar(100) NOT NULL,
   `Rut` varchar(12) NOT NULL,
+  `Cargo` varchar(50) NOT NULL,
   `Contraseña` varchar(255) NOT NULL,
   `Correo_electronico` varchar(255) NOT NULL,
   `Rol` varchar(25) NOT NULL
@@ -305,7 +323,7 @@ ALTER TABLE `u_sinconfirmar`
 -- AUTO_INCREMENT de la tabla `art`
 --
 ALTER TABLE `art`
-  MODIFY `Art_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Art_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Restricciones para tablas volcadas

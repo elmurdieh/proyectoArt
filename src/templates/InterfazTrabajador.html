@@ -166,20 +166,6 @@
                 </div>
               `;
               break;
-            case 'Configuracion':
-              mainContent.innerHTML = `
-                <header class="flex justify-between items-center mb-6">
-                  <h1 class="text-2xl font-bold">Estas en Configuracion</h1>
-                </header>
-              `;
-              break;
-            case 'Cerrar Sesion':
-              mainContent.innerHTML = `
-                <header class="flex justify-between items-center mb-6">
-                  <h1 class="text-2xl font-bold">Cerrar Sesion Aun Sin implementar</h1>
-                </header>
-              `;
-              break;
           }
         });
       });
@@ -195,7 +181,6 @@
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded bg-secondary text-secondary-foreground">Menu Art</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Interfaz</a></li>
           <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Guia Controles Criticos</a></li>
-          <li class="mb-2"><a href="#" class="block py-2 px-4 rounded hover:bg-primary/80">Configuracion</a></li>
           <li class="mb-2">
             <form action="/logout" method="post">
               <button type="submit" class="block py-2 px-4 rounded hover:bg-primary/80">Cerrar Sesión</button>
@@ -227,9 +212,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td class="p-2 border-b">${art.Lug_esp}</td>
                     <td class="p-2 border-b">${trabajadoresAsignados}</td>
                     <td class="p-2 border-b">
-                        <button onclick="realizarVerArt(${art.Art_id})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
+                        <form action="{{ url_for('art_trabajador_view') }}" method="get"><button onclick="realizarVerArt(${art.Art_id})" class="bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
                             Realizar / Ver Art
-                        </button>
+                        </button></form>
                     </td>
                     <td class="p-2 border-b">${art.Estado_cierre || ''}</td>
                     <td class="p-2 border-b">
